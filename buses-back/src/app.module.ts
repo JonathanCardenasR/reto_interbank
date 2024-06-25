@@ -11,6 +11,9 @@ import { ItinerarioEntity } from './domain/entities/itinerario.entity';
 import { ReservaEntity } from './domain/entities/reserva.entity';
 import { AsientoEntity } from './domain/entities/asiento.entity';
 import { UserController } from './infrastructure/user.controller';
+import { BusController } from './infrastructure/bus.controller';
+import { BusUseCaseService } from './application/bus-use-case.service';
+import { OrmBusRepository } from './domain/repository/orm-bus.repository';
 
 @Module({
   imports: [
@@ -21,7 +24,13 @@ import { UserController } from './infrastructure/user.controller';
     TypeOrmModule.forFeature([ReservaEntity]),
     TypeOrmModule.forFeature([AsientoEntity]),
   ],
-  controllers: [AppController, UserController],
-  providers: [AppService, UserUseCaseService, OrmUserRepository],
+  controllers: [AppController, UserController, BusController],
+  providers: [
+    AppService,
+    UserUseCaseService,
+    BusUseCaseService,
+    OrmUserRepository,
+    OrmBusRepository,
+  ],
 })
 export class AppModule {}
